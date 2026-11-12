@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lung Disease Predictor - AI-assisted symptom-based lung health analysis" />
+  <title><%= title %> | Lung Disease Predictor</title>
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <nav class="navbar container" aria-label="Main navigation">
+        <a href="/" class="brand" aria-label="Lung Disease Predictor Home">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C9.5 4 6.5 5 6.5 8.5c0 2 1.5 3 1.5 5 0 1.5-1 2.5-1 5 0 2.5 2 3.5 5 3.5" />
+              <path d="M12 2c2.5 2 5.5 3 5.5 6.5 0 2-1.5 3-1.5 5 0 1.5 1 2.5 1 5 0 2.5-2 3.5-5 3.5" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="brand-name">LungCare</span>
+            <span class="brand-tagline">Predictor</span>
+          </span>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="/" class="<%= activePage === 'home' ? 'active' : '' %>">Home</a></li>
+          <li>
+            <a href="/predict" class="<%= activePage === 'predict' ? 'active' : '' %>">Predict</a>
+          </li>
+          <li>
+            <a href="/history" class="<%= activePage === 'history' ? 'active' : '' %>">History</a>
+          </li>
+          <li><a href="#about" class="<%= activePage === 'home' ? 'active' : '' %>">About</a></li>
+          <li>
+            <a href="/predict" class="btn btn-nav-cta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+              </svg>
+              Get Started
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-content">

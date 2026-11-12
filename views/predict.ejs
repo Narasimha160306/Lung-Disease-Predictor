@@ -1,0 +1,290 @@
+<%- include('partials/header', { title: 'Predict', activePage: 'predict' }) %>
+
+<div class="page-hero predict-hero">
+  <div class="container">
+    <span class="section-kicker">Symptom Assessment</span>
+    <h1>Check Your Lung Health</h1>
+    <p>Answer the following questions honestly. A trained Random Forest model uses your responses to estimate respiratory risk.</p>
+  </div>
+</div>
+
+<section class="form-section">
+  <div class="container form-container">
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-error" role="alert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 8v4M12 16h.01" />
+        </svg>
+        <span><%= error %></span>
+      </div>
+    <% } %>
+
+    <form id="predictForm" action="/predict" method="POST" class="predict-form" novalidate>
+      <!-- Personal Details -->
+      <div class="form-step" id="step-1">
+        <div class="form-step-header">
+          <span class="step-number">1</span>
+          <div>
+            <h2>Personal Details</h2>
+            <p>Basic information helps us personalize your analysis.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="age">Age (years) <span class="req">*</span></label>
+            <div class="input-with-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                min="1"
+                max="120"
+                placeholder="e.g. 35"
+                value="<%= typeof formData !== 'undefined' && formData.age ? formData.age : '' %>"
+                required
+              />
+            </div>
+            <span class="hint">Enter your current age between 1 and 120.</span>
+          </div>
+
+          <div class="form-group">
+            <label>Gender <span class="req">*</span></label>
+            <div class="radio-card-group">
+              <label class="radio-card">
+                <input type="radio" name="gender" value="male" <%= (typeof formData === 'undefined' || formData.gender === 'male') ? 'checked' : '' %> />
+                <span class="radio-card-inner">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="10" cy="10" r="4" />
+                    <path d="M10 14v6M7 17h6M21 3l-6 6M21 3h-5M21 3v5" />
+                  </svg>
+                  Male
+                </span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="gender" value="female" <%= typeof formData !== 'undefined' && formData.gender === 'female' ? 'checked' : '' %> />
+                <span class="radio-card-inner">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="5" />
+                    <path d="M12 13v8M9 18h6" />
+                  </svg>
+                  Female
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="smokingHistory">Smoking History</label>
+            <div class="select-wrap">
+              <select id="smokingHistory" name="smokingHistory">
+                <option value="no" <%= (typeof formData === 'undefined' || formData.smokingHistory === 'no') ? 'selected' : '' %>>Never Smoked</option>
+                <option value="ex-smoker" <%= typeof formData !== 'undefined' && formData.smokingHistory === 'ex-smoker' ? 'selected' : '' %>>Ex-Smoker</option>
+                <option value="yes" <%= typeof formData !== 'undefined' && formData.smokingHistory === 'yes' ? 'selected' : '' %>>Current Smoker</option>
+              </select>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="form-nav">
+          <button type="button" class="btn btn-outline" data-next="2">Continue</button>
+        </div>
+      </div>
+
+      <!-- Symptoms -->
+      <div class="form-step" id="step-2" style="display:none;">
+        <div class="form-step-header">
+          <span class="step-number">2</span>
+          <div>
+            <h2>Respiratory Symptoms</h2>
+            <p>Select the severity for each symptom you are experiencing.</p>
+          </div>
+        </div>
+
+        <div class="symptom-list">
+          <div class="symptom-item">
+            <div class="symptom-label">
+              <span class="symptom-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </span>
+              <div>
+                <strong>Chest Pain</strong>
+                <span>Discomfort or pressure in the chest</span>
+              </div>
+            </div>
+            <div class="segmented">
+              <label><input type="radio" name="chestPain" value="none" checked /><span>None</span></label>
+              <label><input type="radio" name="chestPain" value="mild" /><span>Mild</span></label>
+              <label><input type="radio" name="chestPain" value="moderate" /><span>Moderate</span></label>
+              <label><input type="radio" name="chestPain" value="severe" /><span>Severe</span></label>
+            </div>
+          </div>
+
+          <div class="symptom-item">
+            <div class="symptom-label">
+              <span class="symptom-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+                </svg>
+              </span>
+              <div>
+                <strong>Cough</strong>
+                <span>Type of cough you have</span>
+              </div>
+            </div>
+            <div class="segmented">
+              <label><input type="radio" name="cough" value="none" checked /><span>None</span></label>
+              <label><input type="radio" name="cough" value="dry" /><span>Dry</span></label>
+              <label><input type="radio" name="cough" value="wet" /><span>Wet</span></label>
+              <label><input type="radio" name="cough" value="persistent" /><span>Persistent</span></label>
+            </div>
+          </div>
+
+          <div class="symptom-item">
+            <div class="symptom-label">
+              <span class="symptom-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2 3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" />
+                </svg>
+              </span>
+              <div>
+                <strong>Breathing Difficulty</strong>
+                <span>Shortness of breath or labored breathing</span>
+              </div>
+            </div>
+            <div class="segmented">
+              <label><input type="radio" name="breathingDifficulty" value="none" checked /><span>None</span></label>
+              <label><input type="radio" name="breathingDifficulty" value="mild" /><span>Mild</span></label>
+              <label><input type="radio" name="breathingDifficulty" value="moderate" /><span>Moderate</span></label>
+              <label><input type="radio" name="breathingDifficulty" value="severe" /><span>Severe</span></label>
+            </div>
+          </div>
+
+          <div class="symptom-item">
+            <div class="symptom-label">
+              <span class="symptom-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.1-2.5 5.5-.8.9-1.5 1.7-1.5 2.5v1a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-1c0-.8-.7-1.6-1.5-2.5C6.2 13.1 5 11.4 5 9a7 7 0 0 1 7-7z" />
+                </svg>
+              </span>
+              <div>
+                <strong>Fatigue</strong>
+                <span>Persistent tiredness or exhaustion</span>
+              </div>
+            </div>
+            <div class="segmented">
+              <label><input type="radio" name="fatigue" value="none" checked /><span>None</span></label>
+              <label><input type="radio" name="fatigue" value="mild" /><span>Mild</span></label>
+              <label><input type="radio" name="fatigue" value="moderate" /><span>Moderate</span></label>
+              <label><input type="radio" name="fatigue" value="severe" /><span>Severe</span></label>
+            </div>
+          </div>
+
+          <div class="symptom-item">
+            <div class="symptom-label">
+              <span class="symptom-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.9 7.9a5 5 0 0 1 0 7.1M18.4 4.4a9 9 0 0 1 0 12.7M12 12h.01" />
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+                </svg>
+              </span>
+              <div>
+                <strong>Wheezing</strong>
+                <span>High-pitched whistling sound when breathing</span>
+              </div>
+            </div>
+            <div class="segmented">
+              <label><input type="radio" name="wheezing" value="none" checked /><span>None</span></label>
+              <label><input type="radio" name="wheezing" value="mild" /><span>Mild</span></label>
+              <label><input type="radio" name="wheezing" value="moderate" /><span>Moderate</span></label>
+              <label><input type="radio" name="wheezing" value="severe" /><span>Severe</span></label>
+            </div>
+          </div>
+
+          <div class="symptom-item">
+            <div class="symptom-label">
+              <span class="symptom-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3v18M12 3l-4 4M12 3l4 4" />
+                </svg>
+              </span>
+              <div>
+                <strong>Fever</strong>
+                <span>Elevated body temperature</span>
+              </div>
+            </div>
+            <div class="segmented">
+              <label><input type="radio" name="fever" value="none" checked /><span>None</span></label>
+              <label><input type="radio" name="fever" value="low" /><span>Low</span></label>
+              <label><input type="radio" name="fever" value="high" /><span>High</span></label>
+            </div>
+          </div>
+
+          <div class="symptom-item">
+            <div class="symptom-label">
+              <span class="symptom-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2 3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" />
+                  <path d="M9 12l2 2 4-4" />
+                </svg>
+              </span>
+              <div>
+                <strong>Weight Loss</strong>
+                <span>Unexplained weight loss recently</span>
+              </div>
+            </div>
+            <div class="segmented">
+              <label><input type="radio" name="weightLoss" value="none" checked /><span>None</span></label>
+              <label><input type="radio" name="weightLoss" value="mild" /><span>Mild</span></label>
+              <label><input type="radio" name="weightLoss" value="severe" /><span>Severe</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <button type="button" class="btn btn-outline" data-back="1">Back</button>
+          <button type="submit" class="btn btn-primary">
+            Analyze Symptoms
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
+  <div class="loading-content">
+    <div class="loading-pulse">
+      <div class="pulse-ring ring-1"></div>
+      <div class="pulse-ring ring-2"></div>
+      <div class="pulse-ring ring-3"></div>
+      <div class="loading-lungs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C9.5 4 6.5 5 6.5 8.5c0 2 1.5 3 1.5 5 0 1.5-1 2.5-1 5 0 2.5 2 3.5 5 3.5" />
+          <path d="M12 2c2.5 2 5.5 3 5.5 6.5 0 2-1.5 3-1.5 5 0 1.5 1 2.5 1 5 0 2.5-2 3.5-5 3.5" />
+        </svg>
+      </div>
+    </div>
+    <h3>Analyzing Symptoms...</h3>
+    <p>The trained Random Forest model is scoring your lung health profile.</p>
+    <div class="loading-bar">
+      <div class="loading-bar-fill" id="loadingBarFill"></div>
+    </div>
+    <span class="loading-status" id="loadingStatus">Processing...</span>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

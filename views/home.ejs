@@ -1,0 +1,371 @@
+<%- include('partials/header', { title: 'Home', activePage: 'home' }) %>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <path d="M22 4 12 14.01l-3-3" />
+        </svg>
+        AI-Powered Lung Health Analysis
+      </span>
+      <h1>Breathe Easier. <span class="grad-text">Know Your Lung Health.</span></h1>
+      <p class="hero-subtitle">
+        Answer a few questions about your symptoms and let a trained Random Forest model analyze your
+        respiratory health — instantly. Understand potential conditions and take the right next step with confidence.
+      </p>
+      <div class="hero-actions">
+        <a href="/predict" class="btn btn-primary btn-lg">
+          Start Free Prediction
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#about" class="btn btn-outline btn-lg">Learn More</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <span class="trust-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </span>
+          <div>
+            <strong>100k+</strong>
+            <span>Predictions Made</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </span>
+          <div>
+            <strong>Medical Grade</strong>
+            <span>Analysis Engine</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" />
+            </svg>
+          </span>
+          <div>
+            <strong>Private &</strong>
+            <span>Secure</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-card-float">
+        <div class="lung-illustration">
+          <svg viewBox="0 0 240 240" fill="none">
+            <defs>
+              <linearGradient id="lungGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#0E9B9B" />
+                <stop offset="100%" stop-color="#13C5B0" />
+              </linearGradient>
+            </defs>
+            <path d="M120 40c-15 12-40 16-40 52 0 20 12 30 12 50 0 16-10 28-10 52 0 26 20 36 38 36s38-10 38-36c0-24-10-36-10-52 0-20 12-30 12-50 0-36-25-40-40-52z"
+              fill="url(#lungGrad)" opacity="0.18" />
+            <path d="M120 60c-12 10-32 14-32 42 0 16 10 24 10 40 0 13-8 22-8 42 0 21 16 29 30 29s30-8 30-29c0-20-8-29-8-42 0-16 10-24 10-40 0-28-20-32-32-42z"
+              stroke="#0E9B9B" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+            <path d="M120 60v130" stroke="#0E9B9B" stroke-width="2" stroke-dasharray="4 6" opacity="0.6" />
+            <circle cx="120" cy="92" r="5" fill="#13C5B0" opacity="0.8" />
+            <circle cx="120" cy="130" r="5" fill="#13C5B0" opacity="0.6" />
+            <circle cx="120" cy="168" r="5" fill="#13C5B0" opacity="0.7" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="hero-card hero-card-1">
+        <div class="mini-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+          </svg>
+        </div>
+        <div>
+          <span>Risk Score</span>
+          <strong>87%</strong>
+        </div>
+        <div class="mini-progress"><span style="width: 87%"></span></div>
+      </div>
+
+      <div class="hero-card hero-card-2">
+        <div class="mini-card-icon teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+          </svg>
+        </div>
+        <div>
+          <span>Analysis</span>
+          <strong>Complete</strong>
+        </div>
+      </div>
+
+      <div class="hero-card hero-card-3">
+        <div class="mini-card-icon lime">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </div>
+        <div>
+          <span>Status</span>
+          <strong>Healthy Lungs</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="stats-section" id="statistics">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12c0-5.5-4.5-10-10-10S2 6.5 2 12s4.5 10 10 10 10-4.5 10-10z" />
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+          </svg>
+        </div>
+        <div class="stat-value" data-count="100">0</div>
+        <div class="stat-label">Predictions Analyzed</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.9 7.9a5 5 0 0 1 0 7.1M18.4 4.4a9 9 0 0 1 0 12.7M12 12h.01" />
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+          </svg>
+        </div>
+        <div class="stat-value" data-count="93">0</div>
+        <div class="stat-label">% Detection Accuracy</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z" />
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+          </svg>
+        </div>
+        <div class="stat-value" data-count="7">0</div>
+        <div class="stat-label">Conditions Covered</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        </div>
+        <div class="stat-value" data-count="24">0</div>
+        <div class="stat-label">Hours / 7 Days Support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-kicker">About The Project</span>
+      <h2>Understanding Your Respiratory Health</h2>
+      <p>
+        The Lung Disease Predictor is a web application designed to analyze your symptoms and provide
+        preliminary insights into potential lung conditions. A Random Forest classifier trained on thousands of
+        clinically patterned cases estimates the most likely condition and confidence score.
+      </p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-card-stack">
+          <div class="about-card card-back"></div>
+          <div class="about-card card-mid"></div>
+          <div class="about-card card-front">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" />
+            </svg>
+            <h3>Intelligent Analysis</h3>
+            <p>Our engine evaluates multiple symptom dimensions to produce a clear, actionable risk profile.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-list">
+        <div class="about-feature">
+          <span class="about-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </span>
+          <div>
+            <h4>Trained Random Forest Model</h4>
+            <p>An ensemble of decision trees learns symptom patterns and outputs class probabilities.</p>
+          </div>
+        </div>
+        <div class="about-feature">
+          <span class="about-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </span>
+          <div>
+            <h4>Comprehensive Feedback</h4>
+            <p>Get disease descriptions, causes, precautions, and recommended specialists in one report.</p>
+          </div>
+        </div>
+        <div class="about-feature">
+          <span class="about-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </span>
+          <div>
+            <h4>History Tracking</h4>
+            <p>Every prediction is saved so you can track changes in your health over time.</p>
+          </div>
+        </div>
+        <div class="about-feature">
+          <span class="about-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </span>
+          <div>
+            <h4>Privacy First</h4>
+            <p>Your data stays on your machine. No accounts, no tracking — just health insight.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-kicker">Key Features</span>
+      <h2>Everything You Need to Understand Your Lungs</h2>
+      <p>A streamlined experience focused on clear, actionable health insights.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <h3>Accurate Predictions</h3>
+        <p>Get ML-based preliminary results from a validated Random Forest classifier.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 6v6l4 2" />
+          </svg>
+        </div>
+        <h3>Fast & Simple</h3>
+        <p>Complete your assessment in under two minutes with an intuitive guided form.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18" />
+            <path d="M19 9l-5 5-4-4-3 3" />
+          </svg>
+        </div>
+        <h3>Visual Reports</h3>
+        <p>Clear progress bars and confidence scores make risk levels easy to understand.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </div>
+        <h3>Specialist Guidance</h3>
+        <p>Instantly see the type of doctor to consult for your specific condition.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 8V4H8" />
+            <rect x="4" y="8" width="16" height="12" rx="2" />
+            <path d="M2 14h2M20 14h2M15 13v2M9 13v2" />
+          </svg>
+        </div>
+        <h3>Mobile Friendly</h3>
+        <p>A responsive design that works beautifully on any device, anywhere.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </div>
+        <h3>Responsive Support</h3>
+        <p>Friendly, expert-guided steps for every possible outcome.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-card">
+      <div class="cta-content">
+        <h2>Ready to Assess Your Lung Health?</h2>
+        <p>Take the first step towards understanding your respiratory well-being today.</p>
+        <a href="/predict" class="btn btn-light btn-lg">
+          Begin Assessment Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+      <div class="cta-graphic" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C9.5 4 6.5 5 6.5 8.5c0 2 1.5 3 1.5 5 0 1.5-1 2.5-1 5 0 2.5 2 3.5 5 3.5" />
+          <path d="M12 2c2.5 2 5.5 3 5.5 6.5 0 2-1.5 3-1.5 5 0 1.5 1 2.5 1 5 0 2.5-2 3.5-5 3.5" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

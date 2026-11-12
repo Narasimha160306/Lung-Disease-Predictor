@@ -1,0 +1,93 @@
+<%- include('partials/header', { title: 'History', activePage: 'history' }) %>
+
+<div class="page-hero history-hero">
+  <div class="container">
+    <span class="section-kicker">Your Records</span>
+    <h1>Prediction History</h1>
+    <p>A log of all your previous symptom assessments and their outcomes.</p>
+  </div>
+</div>
+
+<section class="history-section">
+  <div class="container">
+    <% if (typeof predictions !== 'undefined' && predictions.length > 0) { %>
+      <div class="history-table-wrap">
+        <div class="history-toolbar">
+          <div class="history-count">
+            <span class="count-badge"><%= predictions.length %></span>
+            <span>Total Predictions</span>
+          </div>
+          <div class="history-filters">
+            <button type="button" class="filter-btn active" data-filter="all">All</button>
+            <button type="button" class="filter-btn" data-filter="high">High Risk</button>
+            <button type="button" class="filter-btn" data-filter="low">Low Risk</button>
+          </div>
+        </div>
+
+        <table class="history-table" id="historyTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Symptoms Summary</th>
+              <th>Predicted Disease</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% predictions.forEach(function(p) { %>
+              <% var formatted = new Date(p.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); %>
+              <% var time = new Date(p.createdAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }); %>
+              <tr data-risk="<%= p.riskLevel %>">
+                <td>
+                  <div class="date-cell">
+                    <strong><%= formatted %></strong>
+                    <span><%= time %></span>
+                  </div>
+                </td>
+                <td>
+                  <div class="symptom-summary">
+                    <span class="symptom-count"><%= countSymptoms(p.symptoms) %> symptoms</span>
+                    <span class="symptom-text"><%= summarizeSymptoms(p.symptoms) %></span>
+                  </div>
+                </td>
+                <td>
+                  <div class="disease-cell">
+                    <span class="risk-indicator risk-<%= p.riskLevel %>"></span>
+                    <span><%= p.predictedDisease %></span>
+                  </div>
+                </td>
+                <td>
+                  <div class="confidence-cell">
+                    <div class="confidence-bar">
+                      <div class="confidence-fill" data-width="<%= p.confidence %>"></div>
+                    </div>
+                    <span class="confidence-value"><%= p.confidence %>%</span>
+                  </div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } else { %>
+      <div class="empty-state">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18" />
+            <path d="M19 9l-5 5-4-4-3 3" />
+          </svg>
+        </div>
+        <h2>No Predictions Yet</h2>
+        <p>Your prediction history will appear here. Run your first lung health analysis to get started.</p>
+        <a href="/predict" class="btn btn-primary btn-lg">
+          Start Your First Prediction
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
